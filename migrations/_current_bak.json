@@ -1,0 +1,213 @@
+{
+    "tables": {
+        "matches": {
+            "tableName": "matches",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"gen_random_uuid()\")"
+                    },
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "name": {
+                    "allowNull": false,
+                    "field": "name",
+                    "seqType": "Sequelize.STRING(50)"
+                },
+                "state": {
+                    "allowNull": false,
+                    "field": "state",
+                    "seqType": "Sequelize.ENUM('INPROGRESS', 'FINISHED')"
+                },
+                "description": {
+                    "allowNull": true,
+                    "field": "description",
+                    "seqType": "Sequelize.STRING(200)"
+                },
+                "status": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "value": "active"
+                    },
+                    "field": "status",
+                    "seqType": "Sequelize.ENUM('active', 'deactivate')"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"CURRENT_TIMESTAMP\")"
+                    },
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"CURRENT_TIMESTAMP\")"
+                    },
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "teams": {
+            "tableName": "teams",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"gen_random_uuid()\")"
+                    },
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "team_type": {
+                    "allowNull": false,
+                    "field": "team_type",
+                    "seqType": "Sequelize.STRING(50)"
+                },
+                "result": {
+                    "allowNull": false,
+                    "field": "result",
+                    "seqType": "Sequelize.ENUM('PENDING', 'WIN', 'LOSE')"
+                },
+                "status": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "value": "active"
+                    },
+                    "field": "status",
+                    "seqType": "Sequelize.ENUM('active', 'deactivate')"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"CURRENT_TIMESTAMP\")"
+                    },
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"CURRENT_TIMESTAMP\")"
+                    },
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "match_id": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "matches",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "match_id",
+                    "seqType": "Sequelize.UUID"
+                }
+            },
+            "indexes": []
+        },
+        "users": {
+            "tableName": "users",
+            "schema": {
+                "id": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"gen_random_uuid()\")"
+                    },
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.UUID"
+                },
+                "username": {
+                    "allowNull": false,
+                    "field": "username",
+                    "seqType": "Sequelize.STRING(20)"
+                },
+                "name": {
+                    "allowNull": false,
+                    "field": "name",
+                    "seqType": "Sequelize.STRING(30)"
+                },
+                "winRateDefault": {
+                    "allowNull": true,
+                    "field": "winRateDefault",
+                    "seqType": "Sequelize.DECIMAL(5, 2)"
+                },
+                "status": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "value": "active"
+                    },
+                    "field": "status",
+                    "seqType": "Sequelize.ENUM('active', 'deactivate')"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"CURRENT_TIMESTAMP\")"
+                    },
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.literal(\"CURRENT_TIMESTAMP\")"
+                    },
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "user_team": {
+            "tableName": "user_team",
+            "schema": {
+                "teamId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "teams",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "teamId",
+                    "seqType": "Sequelize.UUID"
+                },
+                "userId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "userId",
+                    "seqType": "Sequelize.UUID"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "path": "G:\\Counter\\SplitTeam\\migrations\\_current.json",
+    "backupPath": "G:\\Counter\\SplitTeam\\migrations\\_current_bak.json",
+    "exists": false,
+    "revision": 1
+}
