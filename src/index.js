@@ -25,9 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 //routes
 app.use(require("./routes"));
 
-app.get("*", (req, res, next) => {
-  return next(responseError("404 not found", 404));
-});
+// app.get("*", (req, res, next) => {
+//   return next(responseError("404 not found", 404));
+// });
 
 //middlewares handle error response
 app.use((err, req, res, next) => {
@@ -42,4 +42,8 @@ app.use((err, req, res, next) => {
 
 app.listen(process.env.PORT || 3300, () => {
   console.log("listening on port 3300");
+});
+
+app.get("/", function (req, res) {
+  res.send("dsds");
 });
