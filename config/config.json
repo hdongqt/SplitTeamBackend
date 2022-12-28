@@ -22,11 +22,11 @@
     }
   },
   "production": {
-    "username": "postgres",
-    "password": "BhkDuiax2lrofewKF69R",
-    "database": "railway",
-    "host": "containers-us-west-167.railway.app",
-    "port": "6965",
+    "username": "hdongqt",
+    "password": "cxONjk8p5aPI",
+    "database": "neondb",
+    "host": "ep-white-mountain-319061.us-east-2.aws.neon.tech",
+    "port": "5432",
     "dialect": "postgres",
     "dialectOptions":{
       "ssl":{
